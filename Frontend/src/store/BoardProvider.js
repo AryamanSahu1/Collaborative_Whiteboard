@@ -255,6 +255,12 @@ const BoardProvider = ({ children, canvas }) => {
       type: BOARD_ACTIONS.REDO,
     });
   }, []);
+  const loadCanvasHandler = (canvas) => {
+    dispatchBoardAction({
+      type: BOARD_ACTIONS.LOAD_CANVAS,
+      payload: canvas,
+    });
+  };
 
   const boardContextValue = {
     canvas: boardState.canvas,
@@ -268,6 +274,7 @@ const BoardProvider = ({ children, canvas }) => {
     textAreaBlurHandler,
     undo: boardUndoHandler,
     redo: boardRedoHandler,
+    loadCanvas: loadCanvasHandler,
   };
 
   return (
