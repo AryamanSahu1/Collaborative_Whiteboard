@@ -25,13 +25,25 @@ export default function Canvas() {
     navigate("/");
     return;
   }
-
+  socket.auth = {
+    token: localStorage.getItem("token"),
+  };
   socket.connect();
+  socket.on("connect", () => {
+    console.log("Connected:", socket.id);
+  });
 
+  socket.on("connect_error", (err) => {
+    console.log("Socket Error:", err.message);
+  });
   socket.off("loadCanvas");
   socket.off("canvasError");
+  socket.emit("joinCanvas", {
+      canvasId: id,
+  });
 
   socket.on("loadCanvas", (data) => {
+    console.log("Realtime update received:",data.updatedAt);
     data.elements = (data.elements || []).map((element) => {
       if (element.type === "BRUSH" && element.points?.length) {
         return {
@@ -46,17 +58,13 @@ export default function Canvas() {
 
       return element;
     });
-    socket.on("canvasError", (error) => {
-      alert(error.message);
-      navigate("/profile");
-    });
 
     setCanvas(data);
   });
 
-  socket.emit("joinCanvas", {
-    canvasId: id,
-    token,
+  socket.on("canvasError", (error) => {
+    alert(error.message);
+    navigate("/profile");
   });
 
   return () => {
@@ -72,7 +80,10 @@ export default function Canvas() {
   }
 
   return (
-    <BoardProvider canvas={canvas}>
+    <BoardProvider
+      key={`${canvas._id}-${canvas.updatedAt}`}
+      canvas={canvas}
+    >
       <ToolboxProvider>
         <div
           style={{

@@ -1,3 +1,4 @@
+import socket from "../../socket";
 import { useContext, useEffect, useLayoutEffect, useRef } from "react";
 import rough from "roughjs";
 import boardContext from "../../store/board-context";
@@ -101,10 +102,19 @@ function Board() {
     boardMouseMoveHandler(event);
   };
 
-  const handleMouseUp = () => {
-    boardMouseUpHandler();
-    const canvasId=window.location.pathname.split('/').pop();
-    updateCanvas(canvasId,elements);
+  const handleMouseUp = async () => {
+      boardMouseUpHandler();
+
+      setTimeout(async () => {
+          const canvasId =
+              window.location.pathname.split('/').pop();
+
+          await updateCanvas(canvasId, elements);
+
+          socket.emit("canvasUpdated", {
+              canvasId,
+          });
+      }, 0);
   };
 
   return (

@@ -17,6 +17,15 @@ const boardReducer = (state, action) => {
         activeToolItem: action.payload.tool,
       };
     }
+    case BOARD_ACTIONS.LOAD_CANVAS: {
+      return {
+        ...state,
+        canvas: action.payload,
+        elements: action.payload.elements || [],
+        history: [action.payload.elements || []],
+        index: 0,
+      };
+    }
     case BOARD_ACTIONS.CHANGE_ACTION_TYPE:
       return {
         ...state,
