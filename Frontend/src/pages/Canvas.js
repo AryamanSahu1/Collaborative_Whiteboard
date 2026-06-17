@@ -1,3 +1,4 @@
+import socket from "../socket";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -18,54 +19,53 @@ export default function Canvas() {
   const [canvas, setCanvas] = useState(null);
 
   useEffect(() => {
-    const loadCanvas = async () => {
-      try {
-        const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-        if (!token) {
-          navigate("/");
-          return;
-        }
+  if (!token) {
+    navigate("/");
+    return;
+  }
 
-        const response = await fetch(
-          `http://localhost:3030/api/canvas/load/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const data = await response.json();
+  socket.connect();
 
-        if (!response.ok) {
-            throw new Error(data.message);
-        }
-        data.elements = data.elements.map((element) => {
-        if (element.type === "BRUSH" && element.points?.length) {
-            return {
-            ...element,
-            path: new Path2D(
-                getSvgPathFromStroke(
-                getStroke(element.points)
-                )
-            ),
-            };
-        }
+  socket.off("loadCanvas");
+  socket.off("canvasError");
 
-        return element;
-        });
-
-        console.log("Loaded canvas:", data);
-        console.log("Loaded elements:", data.elements);
-        setCanvas(data);
-      } catch (error) {
-        console.error(error);
-        navigate("/profile");
+  socket.on("loadCanvas", (data) => {
+    data.elements = (data.elements || []).map((element) => {
+      if (element.type === "BRUSH" && element.points?.length) {
+        return {
+          ...element,
+          path: new Path2D(
+            getSvgPathFromStroke(
+              getStroke(element.points)
+            )
+          ),
+        };
       }
-    };
 
-    loadCanvas();
-  }, [id, navigate]);
+      return element;
+    });
+    socket.on("canvasError", (error) => {
+      alert(error.message);
+      navigate("/profile");
+    });
+
+    setCanvas(data);
+  });
+
+  socket.emit("joinCanvas", {
+    canvasId: id,
+    token,
+  });
+
+  return () => {
+    socket.emit("leaveCanvas", id);
+    socket.off("loadCanvas");
+    socket.off("canvasError");
+    socket.disconnect();
+  };
+}, [id, navigate]);
 
   if (!canvas) {
     return <h2>Loading Canvas...</h2>;
