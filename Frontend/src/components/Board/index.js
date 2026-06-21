@@ -4,7 +4,7 @@ import rough from "roughjs";
 import boardContext from "../../store/board-context";
 import { TOOL_ACTION_TYPES, TOOL_ITEMS } from "../../constants";
 import toolboxContext from "../../store/toolbox-context";
-import {updateCanvas,deleteCanvas} from "../../utils/api"; 
+import {updateCanvas} from "../../utils/api"; 
 
 import classes from "./index.module.css";
 

@@ -1,8 +1,6 @@
-import axios from "axios";
 import { API_URL } from "../config";
 
-const token = localStorage.getItem('token')
-const canvasId = localStorage.getItem('canvas_id')
+
 
 const updateCanvas = async (canvasId, elements) => {
   try{
