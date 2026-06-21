@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Poppins', sans-serif;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #eef5ff,
+    #dbeafe,
+    #bfdbfe
+  );
+
+  overflow: hidden;
+  position: relative;
+}
+
+.background-blur {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+}
+
+.blur-1 {
+  width: 350px;
+  height: 350px;
+  background: #60a5fa;
+  top: -50px;
+  left: -50px;
+  opacity: 0.25;
+}
+
+.blur-2 {
+  width: 400px;
+  height: 400px;
+  background: #2563eb;
+  bottom: -120px;
+  right: -120px;
+  opacity: 0.15;
+}
+
+.register-wrapper {
+  width: 100%;
+  max-width: 1400px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(700px, 1fr)
+    450px;
+
+  gap: 80px;
+
+  align-items: center;
+
+  padding: 40px;
+}
+
+.hero-section {
+  min-width: 0;
+}
+
+.title {
+  font-family: 'Dancing Script', cursive;
+
+  font-size: 4.8rem;
+
+  background: linear-gradient(
+    135deg,
+    #1d4ed8,
+    #3b82f6,
+    #60a5fa,
+    #93c5fd
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  display: inline-block;
+
+  text-shadow:
+    0 0 10px rgba(59,130,246,0.2),
+    0 0 20px rgba(59,130,246,0.15);
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  width: 0ch;
+
+  animation:
+    typing 6s steps(24, end) infinite;
+}
+
+.title::after {
+  content: "|";
+  color: #3b82f6;
+  margin-left: 5px;
+  animation: cursor 0.8s infinite;
+}
+
+.subtitle {
+  margin-top: 25px;
+  font-size: 1.25rem;
+  color: #475569;
+  max-width: 550px;
+}
+
+.register-card {
+  background: rgba(255,255,255,0.75);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.4
+  );
+
+  border-radius: 24px;
+
+  padding: 40px;
+
+  box-shadow:
+    0 15px 40px rgba(
+      37,
+      99,
+      235,
+      0.12
+    );
+
+  flex-shrink: 0;
+}
+
+.register-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1e293b;
+}
+
+.register-card input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+
+  border-radius: 12px;
+  border: 1px solid #dbeafe;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: 0.3s;
+}
+
+.register-card input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(
+      37,
+      99,
+      235,
+      0.12
+    );
+}
+
+.register-card button {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #3b82f6
+  );
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.register-card button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(
+      37,
+      99,
+      235,
+      0.3
+    );
+}
+
+.error {
+  background: #fee2e2;
+  color: #dc2626;
+
+  border: 1px solid #fca5a5;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  text-align: center;
+
+  margin-bottom: 15px;
+
+  font-weight: 600;
+}
+
+.register-link {
+  margin-top: 18px;
+  text-align: center;
+  color: #64748b;
+}
+
+.register-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.success {
+  background: #dcfce7;
+  color: #15803d;
+
+  border: 1px solid #86efac;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  text-align: center;
+
+  margin-bottom: 15px;
+
+  font-weight: 600;
+
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+  0% {
+    width: 0ch;
+  }
+
+  45% {
+    width: 24ch;
+  }
+
+  55% {
+    width: 24ch;
+  }
+
+  100% {
+    width: 0ch;
+  }
+}
+
+@keyframes cursor {
+  50% {
+    opacity: 0;
+  }
+}
