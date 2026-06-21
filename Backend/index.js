@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors({
     origin: [
         "http://localhost:3000",
-        "https://collaborative-whiteboard-f8yd.vercel.app/"
+        "https://collaborative-whiteboard-f8yd.vercel.app"
     ]
 }));
 
@@ -35,7 +35,7 @@ const io = new Server(server, {
     cors: {
         origin: [
             "http://localhost:3000",
-            "https://collaborative-whiteboard-f8yd.vercel.app/"
+            "https://collaborative-whiteboard-f8yd.vercel.app"
         ]
     }
 });
