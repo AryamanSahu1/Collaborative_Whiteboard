@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_BASE_URL = "http://localhost:3030/api/canvas"; 
+import { API_URL } from "../config";
 
 const token = localStorage.getItem('token')
 const canvasId = localStorage.getItem('canvas_id')
@@ -11,7 +10,7 @@ const updateCanvas = async (canvasId, elements) => {
     if(!token){
         throw new Error('Unauthorized');
     }
-    const response=await fetch(`${API_BASE_URL}/${canvasId}`,{
+    const response=await fetch(`${API_URL}/api/canvas/${canvasId}`,{
         method: 'PUT',
         headers:{
             'Content-Type': 'application/json',
@@ -37,7 +36,7 @@ const deleteCanvas = async (canvasId) => {
   const token = localStorage.getItem("token");
 
   const response = await fetch(
-    `http://localhost:3030/api/canvas/${canvasId}`,
+    `${API_URL}/api/canvas/${canvasId}`,
     {
       method: "DELETE",
       headers: {
@@ -60,7 +59,7 @@ const shareCanvas = async (canvasId, sharedWithEmail) => {
   const token = localStorage.getItem("token");
 
   const response = await fetch(
-    `http://localhost:3030/api/canvas/share/${canvasId}`,
+    `${API_URL}/api/canvas/share/${canvasId}`,
     {
       method: "PUT",
       headers: {

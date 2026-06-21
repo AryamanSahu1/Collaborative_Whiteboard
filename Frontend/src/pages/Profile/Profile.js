@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
-
+import { API_URL } from "../../config";
 import { updateCanvas,deleteCanvas,shareCanvas } from "../../utils/api";
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -31,7 +31,7 @@ export default function Profile() {
 
         // Fetch user profile
         const profileResponse = await fetch(
-          "http://localhost:3030/users/profile",
+          `${API_URL}/users/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ export default function Profile() {
 
         // Fetch canvases
         const canvasResponse = await fetch(
-          "http://localhost:3030/api/canvas",
+          `${API_URL}/api/canvas`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ export default function Profile() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:3030/api/canvas",
+        `${API_URL}/api/canvas`,
         {
           method: "POST",
           headers: {
