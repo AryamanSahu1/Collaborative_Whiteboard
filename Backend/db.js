@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { eventNames } = require('./models/canvasModel');
 const url= process.env.MONGO_URL;
 
 const connectToDatabase=async()=>{

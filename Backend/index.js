@@ -156,10 +156,9 @@ io.on("connection", (socket) => {
     });
 });
 
-const port = 3030;
-const host = 'localhost';
+const port = process.env.PORT || 3030;
 
 // Start HTTP + Socket.IO server
-server.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+server.listen(port, () => {
+    console.log(`Server is running on ${port}`);
 });
